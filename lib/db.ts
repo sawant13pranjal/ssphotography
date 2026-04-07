@@ -15,16 +15,20 @@ import { unstable_noStore as noStore } from 'next/cache';
 export const getUsers = async (): Promise<User[]> => {
   noStore();
   try {
-    console.log("[DB_DEBUG] Fetching all users from Prisma...");
+    console.log("[DB_DEBUG] Attempting to connect to Prisma and fetch all users...");
     const users = await prisma.user.findMany();
     console.log(`[DB_DEBUG] Successfully fetched ${users.length} users.`);
-    users.forEach(u => {
-      console.log(`[DB_DEBUG] User: ${u.email}, Password Length: ${u.password?.length || 0}, Prefix: ${u.password?.substring(0, 2)}`);
-    });
     return users;
   } catch (error: any) {
-    console.error("[DB_DEBUG] Failed to fetch users:", error);
-    throw new Error(`Database error: ${error.message}`);
+    console.error("[DB_DEBUG] DATABASE FATAL ERROR:", error);
+    console.error("[DB_DEBUG] Current DB URL configured:", process.env.DATABASE_URL?.substring(0, 50) + "...");
+    
+    // Check if it's a Prisma Initialization Error
+    if (error.message.includes('PrismaClientInitializationError')) {
+      console.error("[DB_DEBUG] Prisma Client Initialization failed - Check DATABASE_URL and server access.");
+    }
+    
+    throw new Error(`Database error: Please check server logs for details.`);
   }
 };
 

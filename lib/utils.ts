@@ -7,9 +7,19 @@ export function cn(...inputs: ClassValue[]) {
 
 export const isTempEmail = (email: string): boolean => {
   const tempDomains = [
+    // Common providers
     'mailinator.com', 'guerrillamail.com', 'tempmail.com', 'temp-mail.org', 
     '10minutemail.com', 'trashmail.com', 'maildrop.cc', 'dispostable.com',
-    'getairmail.com', 'yopmail.com'
+    'getairmail.com', 'yopmail.com', 'getnada.com', 'mohmal.com',
+    'dropmail.me', 'clipmail.org', 'bounced.io', 'sharklasers.com',
+    'guerrillamail.biz', 'spam4.me', 'grr.la', 'guerrillamail.info', 
+    'guerrillamail.net', 'guerrillamail.org', 'pokemail.net',
+    'harakirimail.com', '30minutemail.com', 'fakeinbox.com',
+    'mailnesia.com', 'mailcatch.com', 'temp-mail.ru', 'tempmail.re',
+    'temporary-mail.net', 'jetable.org', 'mintemail.com', 'spambox.us',
+    'mytemp.email', 'notsharingmy.info', 'mailnull.com', 'disposable.com',
+    'tempemail.co', 'owlymail.com', 'disposablemail.com', 'emlbox.com',
+    'emlpro.com', 'emlhub.com'
   ];
   const domain = email.split('@')[1]?.toLowerCase();
   return tempDomains.includes(domain);

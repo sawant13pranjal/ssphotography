@@ -4,6 +4,10 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "SS Photo & Films | Capturing Timeless Stories",
   description: "SS Photo & Films is a premium photography studio specializing in Wedding, Maternity, and Corporate events. Capturing raw, unscripted, and authentic moments since 2017.",
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 import { AuthProvider } from "@/lib/authContext";
